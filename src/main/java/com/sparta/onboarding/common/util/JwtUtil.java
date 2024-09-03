@@ -29,22 +29,23 @@ public class JwtUtil {
     public static final String AUTHORIZATION_KEY = "auth";
 
     @Value("${jwt.secret.key}")
-    private String secretKey;
+    private String SECRET_KEY;
     @Value("${jwt.time.access}")
     private Long ACCESS_TOKEN_TIME;
     @Value("${jwt.time.refresh}")
     private Long REFRESH_TOKEN_TIME;
+
     private Key key;
     private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
     @PostConstruct
     public void init() {
-        byte[] bytes = Base64.getDecoder().decode(secretKey);
+        byte[] bytes = Base64.getDecoder().decode(SECRET_KEY);
         key = Keys.hmacShaKeyFor(bytes);
     }
 
     private Key getSigningKey() {
-        byte[] keyBytes = secretKey.getBytes();
+        byte[] keyBytes = SECRET_KEY.getBytes();
         return new SecretKeySpec(keyBytes, SignatureAlgorithm.HS256.getJcaName());
     }
 
@@ -56,7 +57,6 @@ public class JwtUtil {
             if (claims.getExpiration().before(new Date())) {
                 throw new CustomException(ErrorEnum.TOKEN_EXPIRATION);
             }
-
             return true;
         } catch (ExpiredJwtException e) {
             throw new CustomException(ErrorEnum.TOKEN_EXPIRATION);
