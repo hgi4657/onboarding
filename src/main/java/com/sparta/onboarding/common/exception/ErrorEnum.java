@@ -19,6 +19,9 @@ public enum ErrorEnum {
     FALSE_TOKEN(BAD_REQUEST, "잘못된 토큰입니다."),
     INVALID_TOKEN_SIGNATURE(BAD_REQUEST, "JWT 서명 검증 실패했습니다."),
 
+    // User
+    USER_NOT_FOUND(BAD_REQUEST, "사용자를 찾을 수 없습니다."),
+
     // Server
     GENERAL_ERROR(INTERNAL_SERVER_ERROR, "서버에서 예기치 못한 오류가 발생했습니다.");
 
