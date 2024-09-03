@@ -28,6 +28,9 @@ dependencies {
     // Lombok
     implementation 'org.projectlombok:lombok'
 
+    // validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     // JWT 라이브러리
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
