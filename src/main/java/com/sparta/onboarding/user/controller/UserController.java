@@ -1,5 +1,7 @@
 package com.sparta.onboarding.user.controller;
 
+import com.sparta.onboarding.user.dto.SignRequest;
+import com.sparta.onboarding.user.dto.SignResponse;
 import com.sparta.onboarding.user.dto.SignupRequest;
 import com.sparta.onboarding.user.dto.SignupResponse;
 import com.sparta.onboarding.user.service.UserService;
@@ -26,6 +28,18 @@ public class UserController {
     @PostMapping("/signup")
     public SignupResponse signup(@Valid @RequestBody SignupRequest request) {
         SignupResponse response = userService.signup(request);
+        return response;
+    }
+
+    /**
+     * 로그인
+     *
+     * @param request 로그인 정보
+     * @return 발급된 Access 토큰
+     */
+    @PostMapping("/sign")
+    public SignResponse sign(@Valid @RequestBody SignRequest request) {
+        SignResponse response = userService.sign(request);
         return response;
     }
 
