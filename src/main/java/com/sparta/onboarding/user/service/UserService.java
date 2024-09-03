@@ -12,7 +12,6 @@ import com.sparta.onboarding.user.entity.Role;
 import com.sparta.onboarding.user.entity.User;
 import com.sparta.onboarding.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
