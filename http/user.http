@@ -1,0 +1,9 @@
+### 회원가입 signup
+POST {{apiUrl}}/signup
+Content-Type: application/json
+
+{
+  "username": "JIN HI",
+  "password": "Qs!1234",
+  "nickname": "Mentos0"
+}
