@@ -17,6 +17,7 @@ import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 import javax.crypto.spec.SecretKeySpec;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,7 @@ public class JwtUtil {
     public static final String BEARER_PREFIX = "Bearer ";
     public static final String AUTHORIZATION_KEY = "auth";
 
+    @Setter
     @Value("${jwt.secret.key}")
     private String SECRET_KEY;
     @Value("${jwt.time.access}")
@@ -60,8 +62,6 @@ public class JwtUtil {
             return true;
         } catch (ExpiredJwtException e) {
             throw new CustomException(ErrorEnum.TOKEN_EXPIRATION);
-        } catch (UnsupportedJwtException e) {
-            throw new CustomException(ErrorEnum.NOT_SUPPORTED_TOKEN);
         } catch (MalformedJwtException e) {
             throw new CustomException(ErrorEnum.INVALID_TOKEN_FORMAT);
         } catch (SecurityException e) {
@@ -102,14 +102,10 @@ public class JwtUtil {
     }
 
     public void verifySignature(String token) {
-        try {
-            Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token);
-        } catch (JwtException e) {
-            throw new CustomException(ErrorEnum.INVALID_TOKEN_SIGNATURE);
-        }
+        Jwts.parserBuilder()
+            .setSigningKey(getSigningKey())
+            .build()
+            .parseClaimsJws(token);
     }
 
     private String createToken(String username, Role role, Long tokenTime) {
@@ -117,7 +113,7 @@ public class JwtUtil {
         return BEARER_PREFIX +
             Jwts.builder()
                 .setSubject(username)
-                .claim(AUTHORIZATION_KEY, role)
+                .claim(AUTHORIZATION_KEY, role.getAuthority())
                 .setExpiration(new Date(date.getTime() + tokenTime))
                 .setIssuedAt(date)
                 .signWith(getSigningKey(), signatureAlgorithm)
