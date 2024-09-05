@@ -1,0 +1,18 @@
+### 회원가입 signup
+POST {{apiUrl}}/signup
+Content-Type: application/json
+
+{
+  "username": "JIN HI",
+  "password": "Qs!1234",
+  "nickname": "Mentos0"
+}
+
+### 로그인 sign
+POST {{apiUrl}}/sign
+Content-Type: application/json
+
+{
+  "username": "JIN HI",
+  "password": "Qs!1234"
+}
