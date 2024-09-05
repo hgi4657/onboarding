@@ -20,7 +20,7 @@ public enum ErrorEnum {
 
     // User
     USER_NOT_FOUND(BAD_REQUEST, "사용자를 찾을 수 없습니다."),
-    DUPLICATE_USER(BAD_REQUEST, "중복된 데이터입니다."),
+    DUPLICATE_USER(BAD_REQUEST, "중복된 아이디가 존재합니다."),
     INCORRECT_PASSWORD(BAD_REQUEST,"비밀번호가 일치하지 않습니다."),
 
     // Server
